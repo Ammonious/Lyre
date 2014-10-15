@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/expandable_toggle_button"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/friend"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple">
+
+
+    <com.makeramen.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/userProfilePicture"
+        android:src="@drawable/logo_dark"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="16dp"
+        android:scaleType="centerCrop"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        app:corner_radius="30dip"
+        app:mutate_background="true"
+        app:oval="true" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        xmlns:fancy="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/enter_weight"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:padding="1dp"
+        android:layout_marginRight="16dp"
+        fancy:defaultColor="@color/white"
+        fancy:text="1"
+        fancy:textSize="6dp"
+        fancy:borderWidth="2dp"
+        fancy:borderColor="@color/primary_dark"
+        fancy:radius="30dp"
+        fancy:textColor="@color/primary_dark"
+        android:layout_gravity="center_vertical"
+        android:gravity="center|center_vertical|center_horizontal" />
+
+
+
+    <TextView
+        android:id="@+id/username"
+        android:text="test2"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+
+</LinearLayout>
+
+
+
+</LinearLayout>

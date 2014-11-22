@@ -29,8 +29,6 @@ public class AlarmListAdapter extends BaseAdapter {
     private Context mContext;
     private List<AlarmModel> mAlarms;
     Alarms displayAlarm = new Alarms();
-    ViewHolder viewHolder;
-
 
     private AlarmDBHelper dbHelper;
 
@@ -87,6 +85,8 @@ public class AlarmListAdapter extends BaseAdapter {
 
         System.out.println("View Position: " + String.valueOf(position));
         final AlarmModel model = (AlarmModel) getItem(position);
+
+        ViewHolder viewHolder;
 
         if(convertView == null) {
             LayoutInflater mLayoutInflater = LayoutInflater.from(mContext);

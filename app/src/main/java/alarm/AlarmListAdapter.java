@@ -27,7 +27,7 @@ import parse.ParseConstants;
 public class AlarmListAdapter extends BaseAdapter {
 
     private Context mContext;
-    private List<AlarmModel> mAlarms, mVisible;
+    private List<AlarmModel> mAlarms;
     Alarms displayAlarm = new Alarms();
     ViewHolder viewHolder;
 
@@ -37,7 +37,6 @@ public class AlarmListAdapter extends BaseAdapter {
     public AlarmListAdapter(Context context, List<AlarmModel> alarms) {
         mContext = context;
         mAlarms = alarms;
-        mVisible = alarms;
     }
 
     public void setAlarms(List<AlarmModel> alarms) {
@@ -69,14 +68,12 @@ public class AlarmListAdapter extends BaseAdapter {
     public long getItemId(int position) {
         if (mAlarms != null) {
             return mAlarms.get(position).id;
-
         }
         return 0;
     }
 
     private class ViewHolder
     {
-
         RelativeLayout share;
         RelativeLayout fav;
         RelativeLayout info;
@@ -88,9 +85,8 @@ public class AlarmListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-
+        System.out.println("View Position: " + String.valueOf(position));
         final AlarmModel model = (AlarmModel) getItem(position);
-
 
         if(convertView == null) {
             LayoutInflater mLayoutInflater = LayoutInflater.from(mContext);
@@ -100,22 +96,14 @@ public class AlarmListAdapter extends BaseAdapter {
             viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.visible_toggle);
             viewHolder.btnToggle = (Switch) convertView.findViewById(R.id.alarm_item_toggle);
             convertView.setTag(viewHolder);
-
-
-
-
-
         }
-        else{
-
+        else {
           // viewHolder = (ViewHolder) convertView.getTag();
            viewHolder.btnToggle.getTag();
            viewHolder.checkBox.getTag();
            viewHolder.checkBox.setOnCheckedChangeListener(null);
            viewHolder.btnToggle.setOnCheckedChangeListener(null);
-
         }
-
 
         final TextView txtTime = (TextView) convertView.findViewById(R.id.alarm_item_time);
         txtTime.setText(String.format("%02d:%02d", model.timeHour, model.timeMinute));
@@ -130,7 +118,6 @@ public class AlarmListAdapter extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((AlarmSettings) mContext).setAlarmEnabled((Long) buttonView.getTag(), isChecked);
-
 
                 System.out.println(" Enable Position " + buttonView.getTag());
             }
@@ -153,26 +140,13 @@ public class AlarmListAdapter extends BaseAdapter {
                     displayAlarm.setFbId(userID);
                     displayAlarm.saveInBackground();
 
-
-
                 }
                 else {
-
-
-
-
 
                 }
 
             }
         });
-
-
-
-
-
-
-
 
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_sunday), model.getRepeatingDay(AlarmModel.SUNDAY));
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_monday), model.getRepeatingDay(AlarmModel.MONDAY));
@@ -181,13 +155,6 @@ public class AlarmListAdapter extends BaseAdapter {
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_thursday), model.getRepeatingDay(AlarmModel.THURSDAY));
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_friday), model.getRepeatingDay(AlarmModel.FRDIAY));
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_saturday), model.getRepeatingDay(AlarmModel.SATURDAY));
-
-
-
-
-
-
-
 
         convertView.setTag(Long.valueOf(model.id));
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -207,15 +174,8 @@ public class AlarmListAdapter extends BaseAdapter {
             }
         });
 
-
-
-
         return convertView;
     }
-
-
-
-
 
     private void updateTextColor(TextView view, boolean isOn) {
         if (isOn) {

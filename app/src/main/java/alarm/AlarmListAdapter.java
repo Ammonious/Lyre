@@ -98,11 +98,7 @@ public class AlarmListAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }
         else {
-          // viewHolder = (ViewHolder) convertView.getTag();
-           viewHolder.btnToggle.getTag();
-           viewHolder.checkBox.getTag();
-           viewHolder.checkBox.setOnCheckedChangeListener(null);
-           viewHolder.btnToggle.setOnCheckedChangeListener(null);
+           viewHolder = (ViewHolder) convertView.getTag();
         }
 
         final TextView txtTime = (TextView) convertView.findViewById(R.id.alarm_item_time);
@@ -156,7 +152,6 @@ public class AlarmListAdapter extends BaseAdapter {
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_friday), model.getRepeatingDay(AlarmModel.FRDIAY));
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_saturday), model.getRepeatingDay(AlarmModel.SATURDAY));
 
-        convertView.setTag(Long.valueOf(model.id));
         convertView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -164,7 +159,7 @@ public class AlarmListAdapter extends BaseAdapter {
                 ((AlarmSettings) mContext).startAlarmDetailsActivity(((Long) view.getTag()).longValue());
             }
         });
-        convertView.setTag(Long.valueOf(model.id));
+
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override

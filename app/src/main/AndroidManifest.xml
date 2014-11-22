@@ -3,7 +3,7 @@
     package="epimelis.com.lyre"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-sdk tools:node="replace" />
+    <!--<uses-sdk tools:node="replace" />-->
 
     <application
         android:name="utils.GlobalSettings"

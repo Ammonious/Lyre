@@ -107,22 +107,21 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
                     @Override
                     public void done(List<ParseUser> friends, ParseException e) {
                         if (e == null) {
-                            for (ParseUser user : mUserId) {
-                                for (ParseUser friend : friends) {
-                                    if (friend.getObjectId().equals(
-                                            user.getObjectId())) {
-                                        holder.friend.setVisibility(View.INVISIBLE);
-                                        holder.added = true;
-
-                                        System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to added.");
-                                    }
-                                    else {
-                                        holder.friend.setVisibility(View.VISIBLE);
-                                        holder.added = false;
-                                        System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to NOT added.");
-                                    }
+                           for (ParseUser friend : friends) {
+                                if (friend.getObjectId().equals(userId.getObjectId())) {
+                                    holder.friend.setVisibility(View.INVISIBLE);
+                                    holder.added = true;
+                                    System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to added.");
+                                    return;
                                 }
-                            }
+                                else {
+                                    holder.friend.setVisibility(View.VISIBLE);
+                                    holder.added = false;
+                                    System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to NOT added.");
+                                    return;
+                                }
+                        }
+
                         } else {
 
                         }

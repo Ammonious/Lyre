@@ -49,11 +49,24 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
     ImageLoader imageLoader;
     protected ParseRelation<ParseUser> mFriendsRelation;
     private ParseUser mCurrentUser;
-
+    private List<ParseUser> addedFriends;
     public SearchArrayAdapter(Context ctx, List<Users> parseUsers) {
         super(ctx, R.layout.search_row, parseUsers);
         mUsers = parseUsers;
         imageLoader= new ImageLoader(ctx);
+
+        // Setting the button View to invisible as to prevent users from re-adding same friend \\
+        mCurrentUser = ParseUser.getCurrentUser();
+        mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
+        mFriendsRelation.getQuery().findInBackground(
+                new FindCallback<ParseUser>() {
+                    @Override
+                    public void done(List<ParseUser> friends, ParseException e) {
+                        if (e == null) {
+                            addedFriends = friends;
+                        }
+                    }
+                });
     }
 
     private ViewHolder holder;
@@ -99,33 +112,20 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
         holder.username.setText(user.getName());
         holder.username.setTypeface(tf3);
 
-        // Setting the button View to invisible as to prevent users from re-adding same friend \\
-        mCurrentUser = ParseUser.getCurrentUser();
-        mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
-        mFriendsRelation.getQuery().findInBackground(
-                new FindCallback<ParseUser>() {
-                    @Override
-                    public void done(List<ParseUser> friends, ParseException e) {
-                        if (e == null) {
-                           System.out.println( "checking if: " + user.getName() + "(" + user.getObjectId() + ") has been added already");
-                           ///first set it to false
-                           holder.friend.setVisibility(View.VISIBLE);
-                           holder.added = false;
-                           for (ParseUser friend : friends) {
-                                System.out.println("checking against: " + friend.getObjectId());
-                                if (friend.getObjectId().equals(user.getObjectId())) {
-                                    holder.friend.setVisibility(View.INVISIBLE);
-                                    holder.added = true;
-                                    System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to added.");
-                                    return;
-                                }
-                        }
 
-                        } else {
-
-                        }
-                    }
-                });
+        System.out.println( "checking if: " + user.getName() + "(" + user.getObjectId() + ") has been added already");
+        ///first set it to false
+        holder.friend.setVisibility(View.VISIBLE);
+        holder.added = false;
+        for (ParseUser friend : addedFriends) {
+            System.out.println("checking against: " + friend.getObjectId());
+            if (friend.getObjectId().equals(user.getObjectId())) {
+                holder.friend.setVisibility(View.INVISIBLE);
+                holder.added = true;
+                System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to added.");
+                break;
+            }
+        }
 
         String url = String.format(
                 "https://graph.facebook.com/%s/picture?width=150&height=150",user.getUserId());

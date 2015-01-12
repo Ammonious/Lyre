@@ -87,10 +87,13 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
             holder = (ViewHolder) convertView.getTag();
             System.out.print("User holder already been created.  has he been added?" );
             System.out.println(holder.added);
-            System.out.println("User id: " + String.valueOf(holder.id));
         }
+
+        System.out.println("User id: " + String.valueOf(holder.id));
+
         holder.friend.setTag(position);
         final Users user = mUsers.get(position);
+        System.out.println("User name: " + String.valueOf(user.getName()));
        // System.out.println("This Persons Name" + name.getName()+' '+position);
 
         holder.username.setText(user.getName());
@@ -104,8 +107,9 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
                     @Override
                     public void done(List<ParseUser> friends, ParseException e) {
                         if (e == null) {
+                           System.out.println( "checking if: " + user.getName() + "(" + user.getObjectId() + ") has been added already");
                            for (ParseUser friend : friends) {
-                               System.out.println( friend.getUsername() + "?==" + user.getName() );
+                                System.out.println("checking against: " + friend.getObjectId());
                                 if (friend.getObjectId().equals(user.getObjectId())) {
                                     holder.friend.setVisibility(View.INVISIBLE);
                                     holder.added = true;

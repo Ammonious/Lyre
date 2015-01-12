@@ -127,7 +127,7 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
                 });
 
         String url = String.format(
-                "https://graph.facebook.com/%s/picture?width=150&height=150",userId.getUserId());
+                "https://graph.facebook.com/%s/picture?width=150&height=150",user.getUserId());
 
         imageLoader.DisplayImage(url, holder.profilePic);
 
@@ -135,7 +135,7 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
 
             public void onClick(View v) {
                 final String myID = ParseUser.getCurrentUser().get("fbId").toString();
-                final String friendID = userId.getUserId();
+                final String friendID = user.getUserId();
                 final String myName = ParseUser.getCurrentUser().get("name").toString();
 
                 Friends newfriend = new Friends();
@@ -143,8 +143,8 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
                 newfriend.setUserId(myID); // Requested From FB ID
                 newfriend.setName(myName); // Requested From Name
                 newfriend.setAccepted("false");
-                newfriend.setFriendId(userId.getUserId()); // Gets ID of Friend according to Row
-                newfriend.setfriendName(name.getName()); // Sets friends name
+                newfriend.setFriendId(user.getUserId()); // Gets ID of Friend according to Row
+                newfriend.setfriendName(user.getName()); // Sets friends name
                 newfriend.saveInBackground(); // Saves
 
                 // String friendId = tinyDB.getString("pushfriendId");

@@ -58,7 +58,7 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
         imageLoader= new ImageLoader(ctx);
     }
 
-
+    private ViewHolder holder;
 
     public static class ViewHolder {
 
@@ -68,8 +68,6 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/RobotoSlab-Bold.ttf");
         //  Typeface tf2 = Typeface.createFromAsset(context.getAssets(), "fonts/RobotoSlab-Bold.ttf");
         Typeface tf3 = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Light.ttf");
@@ -95,7 +93,6 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
 
         holder.username.setText(name.getName());
         holder.username.setTypeface(tf3);
-
 
         // Setting the button View to invisible as to prevent users from re-adding same friend \\
         final ViewHolder finalHolder = holder;

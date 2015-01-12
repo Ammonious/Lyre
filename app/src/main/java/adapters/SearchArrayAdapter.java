@@ -59,12 +59,15 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
     }
 
     private ViewHolder holder;
+    private int holderId = 0;
 
     public static class ViewHolder {
 
         public TextView username;
         public RoundedImageView profilePic;
         public FancyButton friend;
+        public boolean added = false;
+        public int id = 0;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -80,98 +83,56 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
             holder.username = (TextView) convertView.findViewById(R.id.user_name);
             holder.profilePic = (RoundedImageView) convertView.findViewById(R.id.userSearchPicture);
             holder.friend = (FancyButton) convertView.findViewById(R.id.add_friend);
+            holder.id = ++holderId;
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
-
+            System.out.print("User holder already been created.  has he been added?" );
+            System.out.println(holder.added);
+            System.out.println("User id: " + String.valueOf(holder.id));
         }
         holder.friend.setTag(position);
         final Users userId = mUserId.get(position);
         final Users name = mName.get(position);
        // System.out.println("This Persons Name" + name.getName()+' '+position);
 
-
         holder.username.setText(name.getName());
         holder.username.setTypeface(tf3);
 
         // Setting the button View to invisible as to prevent users from re-adding same friend \\
-        final ViewHolder finalHolder = holder;
-        convertView.post(new Runnable() {
+        mCurrentUser = ParseUser.getCurrentUser();
+        mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
+        mFriendsRelation.getQuery().findInBackground(
+                new FindCallback<ParseUser>() {
+                    @Override
+                    public void done(List<ParseUser> friends, ParseException e) {
+                        if (e == null) {
+                            for (ParseUser user : mUserId) {
+                                for (ParseUser friend : friends) {
+                                    if (friend.getObjectId().equals(
+                                            user.getObjectId())) {
+                                        holder.friend.setVisibility(View.INVISIBLE);
+                                        holder.added = true;
 
-            @Override
-            public void run() {
-
-
-                mCurrentUser = ParseUser.getCurrentUser();
-                mFriendsRelation = mCurrentUser
-                        .getRelation(ParseConstants.KEY_FRIENDS_RELATION);
-                mFriendsRelation.getQuery().findInBackground(
-                        new FindCallback<ParseUser>() {
-
-                            @Override
-                            public void done(List<ParseUser> friends, ParseException e) {
-                                if (e == null) {
-                                    for (int i = 0; i < mUserId.size(); i++) {
-                                        ParseUser user = mUserId.get(i);
-                                        for (ParseUser friend : friends) {
-                                            if (friend.getObjectId().equals(
-                                                    user.getObjectId())) {
-                                                //finalHolder.friend.getChildAt(i).findViewById(R.id.add_friend).setVisibility((View.INVISIBLE));
-                                                //finalHolder.friend.setTag(position);
-                                                //finalHolder.friend.getTag(position);
-                                                System.out.println(" Tag " + finalHolder.friend.getTag());
-                                                finalHolder.friend.setVisibility(View.INVISIBLE);
-                                            }
-                                        }
+                                        System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to added.");
                                     }
-                                } else {
-
-                                }
-                            }
-                        });
-
-
-                         }
-
-        });
-      /*  if(position>=mUserId.size()-1) {
-            final ViewHolder finalHolder = holder;
-            mCurrentUser = ParseUser.getCurrentUser();
-            mFriendsRelation = mCurrentUser
-                    .getRelation(ParseConstants.KEY_FRIENDS_RELATION);
-            mFriendsRelation.getQuery().findInBackground(
-                    new FindCallback<ParseUser>() {
-
-                        @Override
-                        public void done(List<ParseUser> friends, ParseException e) {
-                            if (e == null) {
-                                for (int i = 0; i < mUserId.size(); i++) {
-                                    ParseUser user = mUserId.get(i);
-                                    for (ParseUser friend : friends) {
-                                        if (friend.getObjectId().equals(
-                                                user.getObjectId())) {
-                                            //finalHolder.friend.getChildAt(i).findViewById(R.id.add_friend).setVisibility((View.INVISIBLE));
-                                            //finalHolder.friend.setTag(position);
-                                            //finalHolder.friend.getTag(position);
-                                            finalHolder.friend.setVisibility(View.INVISIBLE);
-                                        }
+                                    else {
+                                        holder.friend.setVisibility(View.VISIBLE);
+                                        holder.added = false;
+                                        System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to NOT added.");
                                     }
                                 }
-                            } else {
-
                             }
+                        } else {
+
                         }
-                    });
-        }
-*/
+                    }
+                });
+
         String url = String.format(
                 "https://graph.facebook.com/%s/picture?width=150&height=150",userId.getUserId());
 
         imageLoader.DisplayImage(url, holder.profilePic);
-
-
-
-
 
         holder.friend.setOnClickListener(new View.OnClickListener() {
 
@@ -180,34 +141,29 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
                 final String friendID = userId.getUserId();
                 final String myName = ParseUser.getCurrentUser().get("name").toString();
 
-                                Friends newfriend = new Friends();
+                Friends newfriend = new Friends();
 
-                                newfriend.setUserId(myID); // Requested From FB ID
-                                newfriend.setName(myName); // Requested From Name
-                                newfriend.setAccepted("false");
-                                newfriend.setFriendId(userId.getUserId()); // Gets ID of Friend according to Row
-                                newfriend.setfriendName(name.getName()); // Sets friends name
-                                newfriend.saveInBackground(); // Saves
+                newfriend.setUserId(myID); // Requested From FB ID
+                newfriend.setName(myName); // Requested From Name
+                newfriend.setAccepted("false");
+                newfriend.setFriendId(userId.getUserId()); // Gets ID of Friend according to Row
+                newfriend.setfriendName(name.getName()); // Sets friends name
+                newfriend.saveInBackground(); // Saves
 
-                                // String friendId = tinyDB.getString("pushfriendId");
-                                ParseQuery pushQuery = ParseInstallation.getQuery();
-                                pushQuery.whereEqualTo("fbId",friendID);
+                // String friendId = tinyDB.getString("pushfriendId");
+                ParseQuery pushQuery = ParseInstallation.getQuery();
+                pushQuery.whereEqualTo("fbId",friendID);
 
-                                // Send push notification to query
-                                ParsePush push = new ParsePush();
-                                push.setQuery(pushQuery); // Set our Installation query
-                                push.setMessage(myName + " Has Requested To Be Your Friend");
-                                push.sendInBackground();
-
+                // Send push notification to query
+                ParsePush push = new ParsePush();
+                push.setQuery(pushQuery); // Set our Installation query
+                push.setMessage(myName + " Has Requested To Be Your Friend");
+                push.sendInBackground();
 
                 Users friends = getItem(position);
                 SearchArrayAdapter.this.remove(friends);
                 notifyDataSetChanged();
                 Toast.makeText(getContext(), "Friend Request Sent", Toast.LENGTH_SHORT).show();
-
-
-
-
             }
 
         });

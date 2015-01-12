@@ -45,16 +45,14 @@ import utils.ImageLoader;
  * Created by ammonrees on 10/26/14.
  */
 public class SearchArrayAdapter extends ArrayAdapter<Users> {
-    private List<Users> mParseUsers,mUserId,mName;
+    private List<Users> mUsers;
     ImageLoader imageLoader;
     protected ParseRelation<ParseUser> mFriendsRelation;
     private ParseUser mCurrentUser;
 
     public SearchArrayAdapter(Context ctx, List<Users> parseUsers) {
         super(ctx, R.layout.search_row, parseUsers);
-        mUserId = parseUsers;
-        mName = parseUsers;
-
+        mUsers = parseUsers;
         imageLoader= new ImageLoader(ctx);
     }
 
@@ -92,11 +90,10 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
             System.out.println("User id: " + String.valueOf(holder.id));
         }
         holder.friend.setTag(position);
-        final Users userId = mUserId.get(position);
-        final Users name = mName.get(position);
+        final Users user = mUsers.get(position);
        // System.out.println("This Persons Name" + name.getName()+' '+position);
 
-        holder.username.setText(name.getName());
+        holder.username.setText(user.getName());
         holder.username.setTypeface(tf3);
 
         // Setting the button View to invisible as to prevent users from re-adding same friend \\
@@ -108,7 +105,8 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
                     public void done(List<ParseUser> friends, ParseException e) {
                         if (e == null) {
                            for (ParseUser friend : friends) {
-                                if (friend.getObjectId().equals(userId.getObjectId())) {
+                               System.out.println( friend.getUsername() + "?==" + user.getName() );
+                                if (friend.getObjectId().equals(user.getObjectId())) {
                                     holder.friend.setVisibility(View.INVISIBLE);
                                     holder.added = true;
                                     System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to added.");

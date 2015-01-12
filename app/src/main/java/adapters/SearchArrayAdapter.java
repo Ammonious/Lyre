@@ -108,18 +108,15 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
                     public void done(List<ParseUser> friends, ParseException e) {
                         if (e == null) {
                            System.out.println( "checking if: " + user.getName() + "(" + user.getObjectId() + ") has been added already");
+                           ///first set it to false
+                           holder.friend.setVisibility(View.VISIBLE);
+                           holder.added = false;
                            for (ParseUser friend : friends) {
                                 System.out.println("checking against: " + friend.getObjectId());
                                 if (friend.getObjectId().equals(user.getObjectId())) {
                                     holder.friend.setVisibility(View.INVISIBLE);
                                     holder.added = true;
                                     System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to added.");
-                                    return;
-                                }
-                                else {
-                                    holder.friend.setVisibility(View.VISIBLE);
-                                    holder.added = false;
-                                    System.out.println("holder id (" + String.valueOf(holder.id) + ") changing to NOT added.");
                                     return;
                                 }
                         }

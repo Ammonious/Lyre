@@ -21,7 +21,8 @@ public class AlarmService extends Service {
         getApplication().startActivity(alarmIntent);
 
         AlarmManagerHelper.setAlarms(this);
-
+        this.stopSelf();
         return super.onStartCommand(intent, flags, startId);
+
     }
 }

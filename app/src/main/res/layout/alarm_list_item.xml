@@ -2,9 +2,13 @@
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:background="#00000000">
+
+
 
 <RelativeLayout
+    android:id="@+id/options"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp" >
@@ -15,20 +19,24 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="00 : 00"
+        android:textColor="@color/black"
+        android:text="00:00"
         android:textSize="24dp" />
 
     <TextView
-        android:id="@+id/alarm_item_name"
+        android:id="@+id/am_pm_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/alarm_item_time"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:textColor="@color/black"
         android:layout_toLeftOf="@+id/alarm_item_toggle"
         android:layout_toRightOf="@+id/alarm_item_time"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="AM"
+         />
+
+
 
     <TextView
         android:id="@+id/alarm_item_sunday"
@@ -101,12 +109,14 @@
 
 
 
-    <Switch
+    <android.support.v7.widget.SwitchCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/alarm_item_toggle"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"/>
+
+
 
     <CheckBox
         android:id="@+id/visible_toggle"
@@ -114,11 +124,15 @@
         android:layout_height="38dp"
         android:layout_toLeftOf="@id/alarm_item_toggle"
         android:layout_centerVertical="true"
+        android:checked="false"
         android:layout_margin="8dp"
         android:button="@null"
         android:background="@drawable/custom_checkbox"
         />
 
+
+
 </RelativeLayout>
 
-    </FrameLayout>
+
+</FrameLayout>

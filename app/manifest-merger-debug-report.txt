@@ -1,0 +1,332 @@
+-- Merging decision tree log ---
+manifest
+ADDED from AndroidManifest.xml:2:1
+	xmlns:android
+		ADDED from AndroidManifest.xml:2:11
+	package
+		ADDED from AndroidManifest.xml:3:5
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:versionName
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:versionCode
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+application
+ADDED from AndroidManifest.xml:7:5
+MERGED from Lyre.app.libraries:fancybuttons_library:unspecified:11:5
+MERGED from Lyre.app.libraries:facebook:unspecified:24:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.skyfishjy.ripplebackground:library:1.0.1:11:5
+MERGED from com.melnykov:floatingactionbutton:1.0.4:12:5
+MERGED from com.android.support:appcompat-v7:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:cardview-v7:21.0.3:16:5
+MERGED from com.android.support:recyclerview-v7:21.0.3:17:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.android.support:palette-v7:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.github.developerpaul123.filepickerlibrary:library:1.0:14:5
+MERGED from com.quentindommerc.superlistview:library:1.5.2:4:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
+MERGED from com.balysv:material-ripple:0.9.5-SNAPSHOT:12:5
+	android:label
+		ADDED from AndroidManifest.xml:11:9
+	android:allowBackup
+		ADDED from AndroidManifest.xml:9:9
+	android:icon
+		ADDED from AndroidManifest.xml:10:9
+	android:theme
+		ADDED from AndroidManifest.xml:12:9
+	android:name
+		ADDED from AndroidManifest.xml:8:9
+meta-data#com.parse.push.notification_icon
+ADDED from AndroidManifest.xml:16:9
+	android:resource
+		ADDED from AndroidManifest.xml:16:68
+	android:name
+		ADDED from AndroidManifest.xml:16:20
+activity#epimelis.com.lyre.ParseLoginActivity
+ADDED from AndroidManifest.xml:18:9
+	android:windowSoftInputMode
+		ADDED from AndroidManifest.xml:22:13
+	android:label
+		ADDED from AndroidManifest.xml:20:13
+	android:theme
+		ADDED from AndroidManifest.xml:21:13
+	android:name
+		ADDED from AndroidManifest.xml:19:13
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:23:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:24:17
+	android:name
+		ADDED from AndroidManifest.xml:24:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:26:17
+	android:name
+		ADDED from AndroidManifest.xml:26:27
+activity#com.facebook.LoginActivity
+ADDED from AndroidManifest.xml:29:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:32:13
+	android:label
+		ADDED from AndroidManifest.xml:31:13
+	android:name
+		ADDED from AndroidManifest.xml:30:13
+meta-data#com.facebook.sdk.ApplicationId
+ADDED from AndroidManifest.xml:34:9
+	android:name
+		ADDED from AndroidManifest.xml:35:13
+	android:value
+		ADDED from AndroidManifest.xml:36:13
+activity#epimelis.com.lyre.MainActivity
+ADDED from AndroidManifest.xml:38:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:41:13
+	android:label
+		ADDED from AndroidManifest.xml:40:13
+	android:name
+		ADDED from AndroidManifest.xml:39:13
+meta-data#android.app.default_searchable
+ADDED from AndroidManifest.xml:42:13
+	android:name
+		ADDED from AndroidManifest.xml:43:17
+	android:value
+		ADDED from AndroidManifest.xml:44:17
+activity#epimelis.com.lyre.UserSearch
+ADDED from AndroidManifest.xml:46:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:50:13
+	android:label
+		ADDED from AndroidManifest.xml:48:13
+	android:name
+		ADDED from AndroidManifest.xml:47:13
+	android:launchMode
+		ADDED from AndroidManifest.xml:49:13
+intent-filter#android.intent.action.SEARCH
+ADDED from AndroidManifest.xml:51:13
+action#android.intent.action.SEARCH
+ADDED from AndroidManifest.xml:52:17
+	android:name
+		ADDED from AndroidManifest.xml:52:25
+meta-data#android.app.searchable
+ADDED from AndroidManifest.xml:55:13
+	android:resource
+		ADDED from AndroidManifest.xml:57:17
+	android:name
+		ADDED from AndroidManifest.xml:56:17
+activity#alarm.MyAlarmScreen
+ADDED from AndroidManifest.xml:59:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:62:13
+	android:label
+		ADDED from AndroidManifest.xml:61:13
+	android:name
+		ADDED from AndroidManifest.xml:60:13
+activity#alarm.AlarmScreen
+ADDED from AndroidManifest.xml:64:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:65:13
+	android:name
+		ADDED from AndroidManifest.xml:64:19
+service#alarm.AlarmService
+ADDED from AndroidManifest.xml:66:9
+	android:exported
+		ADDED from AndroidManifest.xml:69:13
+	android:enabled
+		ADDED from AndroidManifest.xml:68:13
+	android:name
+		ADDED from AndroidManifest.xml:67:13
+receiver#alarm.AlarmManagerHelper
+ADDED from AndroidManifest.xml:72:9
+	android:name
+		ADDED from AndroidManifest.xml:72:19
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:73:13
+action#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:74:17
+	android:name
+		ADDED from AndroidManifest.xml:74:25
+activity#alarm.SetAlarmActivity
+ADDED from AndroidManifest.xml:78:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:81:13
+	android:label
+		ADDED from AndroidManifest.xml:80:13
+	android:name
+		ADDED from AndroidManifest.xml:79:13
+activity#epimelis.com.lyre.FriendsAlarm
+ADDED from AndroidManifest.xml:84:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:87:13
+	android:label
+		ADDED from AndroidManifest.xml:86:13
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:88:13
+	android:name
+		ADDED from AndroidManifest.xml:85:13
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from AndroidManifest.xml:89:13
+	android:name
+		ADDED from AndroidManifest.xml:90:17
+	android:value
+		ADDED from AndroidManifest.xml:91:17
+activity#epimelis.com.lyre.FriendRequests
+ADDED from AndroidManifest.xml:93:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:96:13
+	android:label
+		ADDED from AndroidManifest.xml:95:13
+	android:name
+		ADDED from AndroidManifest.xml:94:13
+service#com.parse.PushService
+ADDED from AndroidManifest.xml:99:9
+	android:name
+		ADDED from AndroidManifest.xml:99:18
+receiver#com.parse.ParseBroadcastReceiver
+ADDED from AndroidManifest.xml:100:9
+	android:name
+		ADDED from AndroidManifest.xml:100:19
+intent-filter#android.intent.action.BOOT_COMPLETED+android.intent.action.USER_PRESENT
+ADDED from AndroidManifest.xml:101:13
+action#android.intent.action.USER_PRESENT
+ADDED from AndroidManifest.xml:103:17
+	android:name
+		ADDED from AndroidManifest.xml:103:25
+receiver#com.parse.ParsePushBroadcastReceiver
+ADDED from AndroidManifest.xml:106:9
+	android:exported
+		ADDED from AndroidManifest.xml:107:13
+	android:name
+		ADDED from AndroidManifest.xml:106:19
+intent-filter#com.parse.push.intent.DELETE+com.parse.push.intent.OPEN+com.parse.push.intent.RECEIVE
+ADDED from AndroidManifest.xml:108:13
+action#com.parse.push.intent.RECEIVE
+ADDED from AndroidManifest.xml:109:17
+	android:name
+		ADDED from AndroidManifest.xml:109:25
+action#com.parse.push.intent.DELETE
+ADDED from AndroidManifest.xml:110:17
+	android:name
+		ADDED from AndroidManifest.xml:110:25
+action#com.parse.push.intent.OPEN
+ADDED from AndroidManifest.xml:111:17
+	android:name
+		ADDED from AndroidManifest.xml:111:25
+receiver#com.parse.GcmBroadcastReceiver
+ADDED from AndroidManifest.xml:114:9
+	android:permission
+		ADDED from AndroidManifest.xml:115:13
+	android:name
+		ADDED from AndroidManifest.xml:114:19
+intent-filter#com.google.android.c2dm.intent.RECEIVE+com.google.android.c2dm.intent.REGISTRATION+epimelis.com.lyre
+ADDED from AndroidManifest.xml:116:13
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from AndroidManifest.xml:117:17
+	android:name
+		ADDED from AndroidManifest.xml:117:25
+action#com.google.android.c2dm.intent.REGISTRATION
+ADDED from AndroidManifest.xml:118:17
+	android:name
+		ADDED from AndroidManifest.xml:118:25
+category#epimelis.com.lyre
+ADDED from AndroidManifest.xml:123:17
+	android:name
+		ADDED from AndroidManifest.xml:123:27
+uses-permission#android.permission.INTERNET
+ADDED from AndroidManifest.xml:128:5
+	android:name
+		ADDED from AndroidManifest.xml:128:22
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from AndroidManifest.xml:129:5
+	android:name
+		ADDED from AndroidManifest.xml:129:22
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from AndroidManifest.xml:130:5
+	android:name
+		ADDED from AndroidManifest.xml:130:22
+uses-permission#android.permission.WAKE_LOCK
+ADDED from AndroidManifest.xml:131:5
+	android:name
+		ADDED from AndroidManifest.xml:131:22
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:132:5
+MERGED from com.github.developerpaul123.filepickerlibrary:library:1.0:7:5
+	android:name
+		ADDED from AndroidManifest.xml:132:22
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from AndroidManifest.xml:133:5
+	android:name
+		ADDED from AndroidManifest.xml:133:22
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from AndroidManifest.xml:134:5
+	android:name
+		ADDED from AndroidManifest.xml:134:22
+uses-permission#android.permission.VIBRATE
+ADDED from AndroidManifest.xml:135:5
+	android:name
+		ADDED from AndroidManifest.xml:135:22
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from AndroidManifest.xml:136:5
+MERGED from com.github.developerpaul123.filepickerlibrary:library:1.0:8:5
+	android:name
+		ADDED from AndroidManifest.xml:136:22
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from AndroidManifest.xml:137:5
+	android:name
+		ADDED from AndroidManifest.xml:137:22
+uses-permission#android.permission.GET_ACCOUNTS
+ADDED from AndroidManifest.xml:138:5
+	android:name
+		ADDED from AndroidManifest.xml:138:22
+permission#epimelis.com.lyre.permission.C2D_MESSAGE
+ADDED from AndroidManifest.xml:139:5
+	android:protectionLevel
+		ADDED from AndroidManifest.xml:140:9
+	android:name
+		ADDED from AndroidManifest.xml:141:9
+uses-permission#epimelis.com.lyre.permission.C2D_MESSAGE
+ADDED from AndroidManifest.xml:142:5
+	android:name
+		ADDED from AndroidManifest.xml:142:22
+uses-sdk
+INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
+MERGED from Lyre.app.libraries:fancybuttons_library:unspecified:7:5
+MERGED from Lyre.app.libraries:facebook:unspecified:20:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.skyfishjy.ripplebackground:library:1.0.1:7:5
+MERGED from com.melnykov:floatingactionbutton:1.0.4:8:5
+MERGED from com.android.support:appcompat-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.makeramen:roundedimageview:1.3.0:3:3
+MERGED from com.android.support:cardview-v7:21.0.3:15:5
+MERGED from com.android.support:recyclerview-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.android.support:palette-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.rengwuxian.materialedittext:library:1.1.0:6:5
+MERGED from com.mikepenz.actionitembadge:library:2.0.0:8:5
+MERGED from com.github.developerpaul123.filepickerlibrary:library:1.0:10:5
+MERGED from com.quentindommerc.superlistview:library:1.5.2:2:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
+MERGED from com.balysv:material-ripple:0.9.5-SNAPSHOT:8:5
+	android:targetSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+	android:minSdkVersion
+		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from AndroidManifest.xml:0:0
+activity#android.support.v7.widget.TestActivity
+ADDED from com.android.support:recyclerview-v7:21.0.3:18:9
+	android:label
+		ADDED from com.android.support:recyclerview-v7:21.0.3:18:19
+	android:name
+		ADDED from com.android.support:recyclerview-v7:21.0.3:18:60
+activity#com.devpaul.filepickerlibrary.FilePickerActivity
+ADDED from com.github.developerpaul123.filepickerlibrary:library:1.0:18:9
+	android:configChanges
+		ADDED from com.github.developerpaul123.filepickerlibrary:library:1.0:20:13
+	android:name
+		ADDED from com.github.developerpaul123.filepickerlibrary:library:1.0:19:13

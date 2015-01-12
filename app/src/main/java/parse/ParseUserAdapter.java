@@ -2,42 +2,36 @@ package parse;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.balysv.materialripple.MaterialRippleLayout;
 import com.makeramen.RoundedImageView;
-import com.makeramen.RoundedTransformationBuilder;
+import com.parse.CountCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseUser;
+import com.parse.ParseQuery;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
-import alarm.AlarmSettings;
-import alarm.AlarmDetailsActivity;
+import epimelis.com.lyre.MainActivity;
 import epimelis.com.lyre.FriendsAlarm;
 import epimelis.com.lyre.R;
+import mehdi.sakout.fancybuttons.FancyButton;
+import utils.ImageLoader;
 
 /**
  * Created by ammonrees on 8/28/14.
@@ -48,36 +42,33 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
     ViewHolder holder;
     private List<Users> mParseUsers,mUserId,mName;
     Context mContext;
-   // http://graph.facebook.com/<facebookId>/picture?type=square
+    public ImageLoader imageLoader;
 
+    public interface OnDataChangeListener{
+        public void onDataChanged(int size);
+    }
 
+    OnDataChangeListener mOnDataChangeListener;
+    public void setOnDataChangeListener(OnDataChangeListener onDataChangeListener){
+        mOnDataChangeListener = onDataChangeListener;
+    }
 
     public ParseUserAdapter(Context ctx, List<Users> parseUsers) {
        super(ctx, R.layout.friend_row, parseUsers);
        mUserId = parseUsers;
        mName = parseUsers;
+
+        imageLoader= new ImageLoader(ctx);
     }
 
-   /* @Override
-    public int getCount() {
-        return mUserId != null ? mUserId.size() : 0;
-    } */
 
-   /* @Override
-    public ParseUser getItem(int position) {
-        return mParseUsers.get(position);
-    } */
-
- /*   @Override
-    public long getItemId(int position) {
-        return 0;
-    }*/
 
     public static class ViewHolder {
 
         public TextView username;
         public RoundedImageView profilepic;
-        public LinearLayout friend;
+        public MaterialRippleLayout friend;
+        public FancyButton countView;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -90,12 +81,17 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
         LayoutInflater mInflater = (LayoutInflater) getContext()
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.friend_row, null);
+            convertView = mInflater.inflate(R.layout.friend_row, parent, false);
             holder = new ViewHolder();
             holder.username = (TextView) convertView.findViewById(R.id.username);
             holder.profilepic = (RoundedImageView) convertView.findViewById(R.id.userProfilePicture);
-            holder.friend = (LinearLayout) convertView.findViewById(R.id.friend);
+            holder.friend = (MaterialRippleLayout) convertView.findViewById(R.id.friend);
+            holder.countView = (FancyButton) convertView.findViewById(R.id.count_view);
             convertView.setTag(holder);
+
+            if(mOnDataChangeListener != null) {
+                mOnDataChangeListener.onDataChanged(mUserId.size());
+            }
         } else {
             holder = (ViewHolder) convertView.getTag();
 
@@ -103,70 +99,57 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
        final Users userId = mUserId.get(position);
        final Users name = mName.get(position);
+       final Users alarmCount = mUserId.get(position);
 
+    /*    ParseQuery<ParseObject> query = ParseQuery.getQuery("Alarms");
+        final ViewHolder finalHolder1 = holder;
+        query.whereEqualTo("facebookId",userId.getUserId());
+        query.whereDoesNotExist("soundfile");
+        query.countInBackground(new CountCallback() {
+            public void done(int count, ParseException e) {
+                if (e == null) {
+                    System.out.println("UPDATING ALARM COUNT AMMONIOUS");
+                    String theCount = String.valueOf(count);
 
+                    finalHolder1.countView.setText(theCount);
+
+                    notifyDataSetChanged();
+                } else {
+
+                }
+            }
+        }); */
 
                 holder.username.setText(name.getName());
                 holder.username.setTypeface(tf3);
 
+        holder.countView.setText(String.valueOf(alarmCount.getalarmCount()));
 
-        final ViewHolder finalHolder = holder;
+        String url = String.format(
+                "https://graph.facebook.com/%s/picture?width=150&height=150", userId.getUserId());
 
-
-        new AsyncTask<Void, Void, Bitmap>()
-        {
-            @Override
-            protected Bitmap doInBackground(Void... params)
-            {
-                // safety check
-                if (userId.getUserId() == null)
-                    return null;
-
-                String url = String.format(
-                        "https://graph.facebook.com/%s/picture?width=150&height=150",userId.getUserId());
-
-                // you'll need to wrap the two method calls
-                // which follow in try-catch-finally blocks
-                // and remember to close your input stream
-
-                InputStream inputStream = null;
-                try {
-                    inputStream = new URL(url).openStream();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-
-                return bitmap;
-            }
-
-            @Override
-            protected void onPostExecute(Bitmap bitmap)
-            {
-                // safety check
-                if (bitmap != null);
-
-              finalHolder.profilepic.setImageBitmap(bitmap);
-
-                // do what you need to do with the bitmap :)
-            }
-        }.execute();
-
+        imageLoader.DisplayImage(url, holder.profilepic);
 
 
         holder.friend.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
 
-                Intent intent = new Intent(getContext(), FriendsAlarm.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("name", name.getName());
-                intent.putExtra("picId",userId.getUserId());
-                getContext().startActivity(intent);
+             //   Intent intent = new Intent(getContext(), FriendsAlarm.class);
+             //   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+             //   intent.putExtra("name", name.getName());
+             //   intent.putExtra("picId",userId.getUserId());
+                String url = userId.getUserId();
+                String Username = name.getName();
+                FriendsAlarm.launch(((MainActivity)getContext()), v.findViewById(R.id.userProfilePicture), url, Username);
+             //   getContext().startActivity(intent);
 
 
 
-            }
+
+
+
+           }
 
         });
 

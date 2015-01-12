@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/libraries/FloatingActionButton/FloatingActionButton.iml" filepath="$PROJECT_DIR$/app/libraries/FloatingActionButton/FloatingActionButton.iml" />
       <module fileurl="file://$PROJECT_DIR$/Lyre.iml" filepath="$PROJECT_DIR$/Lyre.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/libraries/SlideExpandableListView Library/SlideExpandableListView Library.iml" filepath="$PROJECT_DIR$/app/libraries/SlideExpandableListView Library/SlideExpandableListView Library.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/libraries/facebook/facebook.iml" filepath="$PROJECT_DIR$/app/libraries/facebook/facebook.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/libraries/fancybuttons_library/fancybuttons_library.iml" filepath="$PROJECT_DIR$/app/libraries/fancybuttons_library/fancybuttons_library.iml" />

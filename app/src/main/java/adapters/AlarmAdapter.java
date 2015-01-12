@@ -41,7 +41,7 @@ import parse.Alarms;
  */
 public class AlarmAdapter extends ArrayAdapter<Alarms> {
     private Context mContext;
-    private List<Alarms> mAlarms,mMusic,mRecord;
+    private List<Alarms> mAlarms;
 
     ViewHolder viewHolder;
 
@@ -49,19 +49,10 @@ public class AlarmAdapter extends ArrayAdapter<Alarms> {
         super(context, R.layout.alarm_row, objects);
         this.mContext = context;
         this.mAlarms = objects;
-        this.mMusic = objects;
-        this.mRecord = objects;
-
-
-
-
     }
-
-
 
     private class ViewHolder
     {
-
         TextView alarm;
         RelativeLayout music,record;
     }
@@ -71,7 +62,6 @@ public class AlarmAdapter extends ArrayAdapter<Alarms> {
         Typeface tf = Typeface.createFromAsset(mContext.getAssets(), "fonts/Roboto-Thin.ttf");
         //  Typeface tf2 = Typeface.createFromAsset(context.getAssets(), "fonts/RobotoSlab-Bold.ttf");
         Typeface tf3 = Typeface.createFromAsset(mContext.getAssets(), "fonts/RobotoSlab-Regular.ttf");
-
 
         if(convertView == null){
             LayoutInflater mLayoutInflater = LayoutInflater.from(mContext);
@@ -85,35 +75,17 @@ public class AlarmAdapter extends ArrayAdapter<Alarms> {
         }
         else {
             viewHolder = (ViewHolder) convertView.getTag();
-
-
         }
 
         final Alarms parseAlarm = mAlarms.get(position);
-
-
 
         TextView recipeView = (TextView) convertView.findViewById(R.id.alarm);
         recipeView.setText(parseAlarm.getAlarm());
         recipeView.setTypeface(tf);
 
-
-
-
-
-
-
-
-
-
-
         viewHolder.music.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-
-
-
-
 
             }
 
@@ -123,15 +95,8 @@ public class AlarmAdapter extends ArrayAdapter<Alarms> {
 
             public void onClick(View v) {
 
-
-
-
             }
         });
-
-
-
-
 
         return convertView;
     }

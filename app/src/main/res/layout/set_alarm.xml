@@ -1,0 +1,221 @@
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:fitsSystemWindows="true"
+        android:background="@color/primary"
+         >
+
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            >
+
+
+
+        <TextView
+            android:id="@+id/alarm_time_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textColor="@color/white"
+            android:text="00:00"
+            android:textSize="72dp" />
+
+
+
+            <TextView
+            android:id="@+id/am_pm_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/white"
+            android:text="AM"
+            android:textSize="18dp" />
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/alarm_details_repeat_weekly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/white"
+            android:checked="true"
+            android:text="@string/details_repeat_weekly" />
+
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            >
+
+        <CheckBox
+            android:id="@+id/alarm_details_repeat_sunday"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="13dp"
+            android:checked="true"
+            android:button="@null"
+            android:background="@drawable/sat_sun_checkbox" />
+
+        <CheckBox
+            android:id="@+id/alarm_details_repeat_monday"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:checked="true"
+            android:button="@null"
+            android:background="@drawable/monday_checkbox"/>
+
+        <CheckBox
+            android:id="@+id/alarm_details_repeat_tuesday"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:checked="true"
+            android:button="@null"
+            android:background="@drawable/tues_thurs_checkbox" />
+
+        <CheckBox
+            android:id="@+id/alarm_details_repeat_wednesday"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:checked="true"
+            android:button="@null"
+            android:background="@drawable/wednesday_checkbox" />
+
+        <CheckBox
+            android:id="@+id/alarm_details_repeat_thursday"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:checked="true"
+            android:button="@null"
+            android:background="@drawable/tues_thurs_checkbox" />
+
+        <CheckBox
+            android:id="@+id/alarm_details_repeat_friday"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"
+            android:checked="true"
+            android:button="@null"
+            android:background="@drawable/friday_checkbox" />
+
+        <CheckBox
+            android:id="@+id/alarm_details_repeat_saturday"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            android:checked="true"
+            android:button="@null"
+            android:background="@drawable/sat_sun_checkbox" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/alarm_ringtone_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@+id/divider4"
+            android:background="@drawable/view_touch_selector"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/alarm_label_tone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/details_alarm_tone"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/alarm_label_tone_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:text="@string/details_alarm_tone_default"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/alarm_details_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textColor="@color/white"
+            android:ems="10"
+            android:hint="Alarm Description"
+            app:baseColor="@color/white"
+            app:primaryColor="@color/white"
+            app:floatingLabel="highlight"/>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        xmlns:fab="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/button_floating_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="16dp"
+        fab:fab_icon="@drawable/ic_check"
+        fab:fab_colorNormal="@color/fab"
+        fab:fab_colorPressed="@color/fab_pressed"/>
+
+</FrameLayout>

@@ -14,6 +14,7 @@ public class AlarmContract {
         public static final String COLUMN_NAME_ALARM_NAME = "name";
         public static final String COLUMN_NAME_ALARM_TIME_HOUR = "hour";
         public static final String COLUMN_NAME_ALARM_TIME_MINUTE = "minute";
+        public static final String COLUMN_NAME_ALARM_AM_PM = "am_pm";
         public static final String COLUMN_NAME_ALARM_REPEAT_DAYS = "days";
         public static final String COLUMN_NAME_ALARM_REPEAT_WEEKLY = "weekly";
         public static final String COLUMN_NAME_ALARM_TONE = "tone";

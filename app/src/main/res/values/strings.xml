@@ -10,7 +10,7 @@
     <string name="title_activity_friend_list">Lyra</string>
     <string name="title_activity_user_search">Results</string>
     <string name="title_activity_alarm_settings">My Alarms</string>
-    <string name="title_activity_alarm_details">AlarmDetailsActivity</string>
+    <string name="title_activity_alarm_details">Set Alarm</string>
     <string name="details_alarm_name">Alarm Name</string>
     <string name="details_repeat_weekly">Repeat Weekly</string>
     <string name="details_sunday">Sunday</string>
@@ -25,5 +25,8 @@
     <string name="id_1">1</string>
     <string name="id_2">2</string>
     <string name="title_activity_friends_alarm">Available Alarms</string>
+    <string name="title_activity_friend_requests">Friend Requests</string>
+    <string name="slidetounlock_label">slide to dismiss</string>
+    <string name="slidetounlock_label_default">slide to dismiss</string>
 
 </resources>

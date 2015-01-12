@@ -29,58 +29,62 @@ public class AlarmManagerHelper extends BroadcastReceiver {
     public static void setAlarms(Context context) {
         cancelAlarms(context);
 
-        AlarmDBHelper dbHelper = new AlarmDBHelper(context);
+        AlarmDBHelper dbHelper = AlarmDBHelper.getInstance(context);
 
-        List<AlarmModel> alarms =  dbHelper.getAlarms();
+        List<AlarmModel> alarms = dbHelper.getAlarms();
 
-        for (AlarmModel alarm : alarms) {
-            if (alarm.isEnabled) {
+        if (alarms == null) {
 
-                PendingIntent pIntent = createPendingIntent(context, alarm);
+                return;
+        } else {
+            for (AlarmModel alarm : alarms) {
+                if (alarm.isEnabled) {
 
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY, alarm.timeHour);
-                calendar.set(Calendar.MINUTE, alarm.timeMinute);
-                calendar.set(Calendar.SECOND, 00);
+                    PendingIntent pIntent = createPendingIntent(context, alarm);
 
-                //Find next time to set
-                final int nowDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-                final int nowHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-                final int nowMinute = Calendar.getInstance().get(Calendar.MINUTE);
-                boolean alarmSet = false;
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(Calendar.HOUR_OF_DAY, alarm.timeHour);
+                    calendar.set(Calendar.MINUTE, alarm.timeMinute);
+                    calendar.set(Calendar.SECOND, 00);
 
-                //First check if it's later in the week
-                for (int dayOfWeek = Calendar.SUNDAY; dayOfWeek <= Calendar.SATURDAY; ++dayOfWeek) {
-                    if (alarm.getRepeatingDay(dayOfWeek - 1) && dayOfWeek >= nowDay &&
-                            !(dayOfWeek == nowDay && alarm.timeHour < nowHour) &&
-                            !(dayOfWeek == nowDay && alarm.timeHour == nowHour && alarm.timeMinute <= nowMinute)) {
-                        calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
+                    //Find next time to set
+                    final int nowDay = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+                    final int nowHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+                    final int nowMinute = Calendar.getInstance().get(Calendar.MINUTE);
+                    boolean alarmSet = false;
 
-                        setAlarm(context, calendar, pIntent);
-                        alarmSet = true;
-                        break;
-                    }
-                }
-
-                //Else check if it's earlier in the week
-                if (!alarmSet) {
+                    //First check if it's later in the week
                     for (int dayOfWeek = Calendar.SUNDAY; dayOfWeek <= Calendar.SATURDAY; ++dayOfWeek) {
-                        if (alarm.getRepeatingDay(dayOfWeek - 1) && dayOfWeek <= nowDay && alarm.repeatWeekly) {
+                        if (alarm.getRepeatingDay(dayOfWeek - 1) && dayOfWeek >= nowDay &&
+                                !(dayOfWeek == nowDay && alarm.timeHour < nowHour) &&
+                                !(dayOfWeek == nowDay && alarm.timeHour == nowHour && alarm.timeMinute <= nowMinute)) {
                             calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
-                            calendar.add(Calendar.WEEK_OF_YEAR, 1);
 
                             setAlarm(context, calendar, pIntent);
                             alarmSet = true;
                             break;
                         }
                     }
+
+                    //Else check if it's earlier in the week
+                    if (!alarmSet) {
+                        for (int dayOfWeek = Calendar.SUNDAY; dayOfWeek <= Calendar.SATURDAY; ++dayOfWeek) {
+                            if (alarm.getRepeatingDay(dayOfWeek - 1) && dayOfWeek <= nowDay && alarm.repeatWeekly) {
+                                calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
+                                calendar.add(Calendar.WEEK_OF_YEAR, 1);
+
+                                setAlarm(context, calendar, pIntent);
+                                alarmSet = true;
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-
     @SuppressLint("NewApi")
-    private static void setAlarm(Context context, Calendar calendar, PendingIntent pIntent) {
+    public static void setAlarm(Context context, Calendar calendar, PendingIntent pIntent) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);
@@ -90,7 +94,7 @@ public class AlarmManagerHelper extends BroadcastReceiver {
     }
 
     public static void cancelAlarms(Context context) {
-        AlarmDBHelper dbHelper = new AlarmDBHelper(context);
+        AlarmDBHelper dbHelper = AlarmDBHelper.getInstance(context);
 
         List<AlarmModel> alarms =  dbHelper.getAlarms();
 

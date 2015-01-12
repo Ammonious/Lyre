@@ -1,5 +1,5 @@
 include ':app'
 include ':app:libraries:fancybuttons_library'
 include ':app:libraries:facebook'
-include ':app:libraries:SlideExpandableListView Library'
 include ':app:libraries:FloatingActionButton'
+

@@ -33,6 +33,13 @@ public class Users extends ParseUser {
         put("name", name);
     }
 
+    public int getalarmCount(){
+        return getInt("alarmCount");
+    }
+    public void setalarmCount(int alarmCount){
+        put("alarmCount", alarmCount);
+    }
+
 
 
 

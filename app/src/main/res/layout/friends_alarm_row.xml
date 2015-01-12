@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:textSize="42dp"
+        android:text="12:00"
+        android:textColor="@color/black"
+        android:id="@+id/alarm" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/alarm"
+        android:layout_toRightOf="@+id/alarm"
+        android:layout_toLeftOf="@+id/record"
+        android:layout_marginLeft="8dp"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:text="AM"
+        android:id="@+id/friend_am_pm" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/alarm"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:text="Loud and annoying"
+        android:id="@+id/alarm_description" />
+
+    <RelativeLayout
+        android:id="@+id/record"
+        android:orientation="horizontal"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_toLeftOf="@+id/music"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_mic"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/music"
+        android:orientation="horizontal"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+
+        >
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_music"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

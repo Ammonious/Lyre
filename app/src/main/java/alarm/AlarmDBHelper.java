@@ -14,16 +14,20 @@ import java.util.List;
  * Created by ammonrees on 9/20/14.
  */
 public class AlarmDBHelper extends SQLiteOpenHelper {
+    private static AlarmDBHelper mInstance = null;
 
-    public static final int DATABASE_VERSION = 11
-            ;
+    public static final int DATABASE_VERSION = 21;
     public static final String DATABASE_NAME = "alarmclock.db";
+
+
+
 
     private static final String SQL_CREATE_ALARM = "CREATE TABLE " + AlarmContract.Alarm.TABLE_NAME + " (" +
             AlarmContract.Alarm._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             AlarmContract.Alarm.COLUMN_NAME_ALARM_NAME + " TEXT," +
             AlarmContract.Alarm.COLUMN_NAME_ALARM_TIME_HOUR + " INTEGER," +
             AlarmContract.Alarm.COLUMN_NAME_ALARM_TIME_MINUTE + " INTEGER," +
+            AlarmContract.Alarm.COLUMN_NAME_ALARM_AM_PM + " TEXT," +
             AlarmContract.Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS + " TEXT," +
             AlarmContract.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY + " BOOLEAN," +
             AlarmContract.Alarm.COLUMN_NAME_ALARM_TONE + " TEXT," +
@@ -33,6 +37,20 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
 
     private static final String SQL_DELETE_ALARM =
             "DROP TABLE IF EXISTS " + AlarmContract.Alarm.TABLE_NAME;
+
+
+    public static AlarmDBHelper getInstance(Context ctx) {
+
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (mInstance == null) {
+            mInstance = new AlarmDBHelper(ctx);
+        }
+        return mInstance;
+    }
+
+
 
     public AlarmDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -55,9 +73,9 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         model.name = c.getString(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_NAME));
         model.timeHour = c.getInt(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_TIME_HOUR));
         model.timeMinute = c.getInt(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_TIME_MINUTE));
+        model.am_pm = c.getString(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_AM_PM));
         model.repeatWeekly = c.getInt(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY)) != 0;
-        model.alarmTone = c.getString(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_TONE)) != "" ? Uri.parse(c.getString(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_TONE))) : null;
-        model.isEnabled = c.getInt(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_ENABLED)) != 0;
+        model.alarmTone = c.getString(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_TONE)) != "" ? Uri.parse(c.getString(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_TONE))) : null;        model.isEnabled = c.getInt(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_ENABLED)) != 0;
         model.isVisible = c.getInt(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_VISIBLE)) != 0;
 
         String[] repeatingDays = c.getString(c.getColumnIndex(AlarmContract.Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS)).split(",");
@@ -73,6 +91,7 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         values.put(AlarmContract.Alarm.COLUMN_NAME_ALARM_NAME, model.name);
         values.put(AlarmContract.Alarm.COLUMN_NAME_ALARM_TIME_HOUR, model.timeHour);
         values.put(AlarmContract.Alarm.COLUMN_NAME_ALARM_TIME_MINUTE, model.timeMinute);
+        values.put(AlarmContract.Alarm.COLUMN_NAME_ALARM_AM_PM, model.am_pm);
         values.put(AlarmContract.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY, model.repeatWeekly);
         values.put(AlarmContract.Alarm.COLUMN_NAME_ALARM_TONE, model.alarmTone != null ? model.alarmTone.toString() : "");
         values.put(AlarmContract.Alarm.COLUMN_NAME_ALARM_ENABLED, model.isEnabled);
@@ -89,21 +108,38 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
     }
 
     public long createAlarm(AlarmModel model) {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+
         ContentValues values = populateContent(model);
+
+
         return getWritableDatabase().insert(AlarmContract.Alarm.TABLE_NAME, null, values);
     }
 
     public long updateAlarm(AlarmModel model) {
+
+
+
         ContentValues values = populateContent(model);
+
+
         return getWritableDatabase().update(AlarmContract.Alarm.TABLE_NAME, values, AlarmContract.Alarm._ID + " = ?", new String[] { String.valueOf(model.id) });
+
+
     }
 
     public AlarmModel getAlarm(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
+
+
         String select = "SELECT * FROM " + AlarmContract.Alarm.TABLE_NAME + " WHERE " + AlarmContract.Alarm._ID + " = " + id;
 
         Cursor c = db.rawQuery(select, null);
+
+
 
         if (c.moveToNext()) {
             return populateModel(c);
@@ -114,6 +150,7 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
 
     public List<AlarmModel> getAlarms() {
         SQLiteDatabase db = this.getReadableDatabase();
+
 
         String select = "SELECT * FROM " + AlarmContract.Alarm.TABLE_NAME;
 
@@ -132,7 +169,9 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         return null;
     }
 
+
     public int deleteAlarm(long id) {
+
         return getWritableDatabase().delete(AlarmContract.Alarm.TABLE_NAME, AlarmContract.Alarm._ID + " = ?", new String[] { String.valueOf(id) });
     }
 }

@@ -6,7 +6,9 @@ import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.PushService;
 
+import epimelis.com.lyre.MainActivity;
 import parse.Alarms;
 
 /**
@@ -24,6 +26,7 @@ public class GlobalSettings extends Application {
         ParseFacebookUtils.initialize("798958860124500");
 
         ParseObject.registerSubclass(Alarms.class);
+        PushService.setDefaultPushCallback(this, MainActivity.class);
 
     }
 

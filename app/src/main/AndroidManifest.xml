@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="epimelis.com.lyre"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="epimelis.com.lyre" >
 
-    <uses-sdk tools:node="replace" />
+
+<<<<<<< HEAD
+=======
+    <!--<uses-sdk tools:node="replace" />-->
+>>>>>>> FETCH_HEAD
 
     <application
         android:name="utils.GlobalSettings"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Material" >
+        android:theme="@style/Theme.Material"
+        >
+
+
+        <meta-data android:name="com.parse.push.notification_icon" android:resource="@drawable/logo"/>
+
         <activity
             android:name=".ParseLoginActivity"
             android:label="@string/app_name"
@@ -24,15 +32,17 @@
         </activity>
         <activity
             android:name="com.facebook.LoginActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
 
         <activity
-            android:name=".FriendList"
-            android:label="@string/title_activity_friend_list" >
+            android:name=".MainActivity"
+            android:label="@string/title_activity_friend_list"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".UserSearch" />
@@ -40,7 +50,8 @@
         <activity
             android:name=".UserSearch"
             android:label="@string/title_activity_user_search"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -50,11 +61,12 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="alarm.AlarmSettings"
-            android:label="@string/title_activity_alarm_settings" >
+            android:name="alarm.MyAlarmScreen"
+            android:label="@string/title_activity_alarm_settings"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name="alarm.AlarmScreen" />
-
+        <activity android:name="alarm.AlarmScreen"
+            android:screenOrientation="portrait"/>
         <service
             android:name="alarm.AlarmService"
             android:enabled="true"
@@ -68,18 +80,71 @@
         </receiver>
 
         <activity
-            android:name="alarm.AlarmDetailsActivity"
-            android:label="@string/title_activity_alarm_details" >
+            android:name="alarm.SetAlarmActivity"
+            android:label="@string/title_activity_alarm_details"
+            android:screenOrientation="portrait">
         </activity>
+
         <activity
             android:name=".FriendsAlarm"
-            android:label="@string/title_activity_friends_alarm" >
+            android:label="@string/title_activity_friends_alarm"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FriendList" />
         </activity>
+        <activity
+            android:name=".FriendRequests"
+            android:label="@string/title_activity_friend_requests"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <service android:name="com.parse.PushService" />
+        <receiver android:name="com.parse.ParseBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <!--
+                  IMPORTANT: Change "com.parse.starter" to match your app's package name.
+                -->
+                <category android:name="epimelis.com.lyre" />
+            </intent-filter>
+        </receiver>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <permission
+        android:protectionLevel="signature"
+        android:name="epimelis.com.lyre.permission.C2D_MESSAGE" />
+    <uses-permission android:name="epimelis.com.lyre.permission.C2D_MESSAGE" />
+
+
 
 </manifest>

@@ -27,18 +27,39 @@ public class Alarms extends ParseObject {
         put("alarm", Alarm);
     }
 
-    public ParseFile getRecording(){
-        return getParseFile("record");
+    public Long getAlarmID(){
+        return getLong("alarm_id");
     }
-    public void setRecording(ParseFile Record){
-        put("record", Record);
+    public void setAlarmID(Long AlarmID){
+        put("alarm_id", AlarmID);
     }
 
-    public ParseFile getMusic(){
-        return getParseFile("music");
+    public ParseFile getSoundfile(){
+        return getParseFile("soundfile");
     }
-    public void setMusic(ParseFile Music){
-        put("music", Music);
+    public void setSoundfile(ParseFile soundfile){
+        put("soundfile", soundfile);
+    }
+
+    public String getFriendId(){
+        return getString("friendId");
+    }
+    public void setFriendFBId(String friendId){
+        put("friendId", friendId);
+    }
+
+    public String getAM_PM(){
+        return getString("am_pm");
+    }
+    public void setAM_PM(String AM_PM){
+        put("am_pm", AM_PM);
+    }
+
+    public String getAlarmDes(){
+        return getString("description");
+    }
+    public void setAlarmDes(String Description){
+        put("description", Description);
     }
 
     public String getFbId(){

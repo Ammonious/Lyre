@@ -4,16 +4,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.facebook.LoginActivity;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
@@ -34,12 +29,12 @@ public class ParseLoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login_screen);
 
         Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/Righteous-Regular.ttf");
 
-        mTitle = (TextView) findViewById(R.id.title);
-        mTitle.setTypeface(tf);
+      //  mTitle = (TextView) findViewById(R.id.title);
+      //  mTitle.setTypeface(tf);
         loginButton = (FancyButton) findViewById(R.id.btn_facebook);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +87,7 @@ public class ParseLoginActivity extends Activity {
     }
 
     private void showUserDetailsActivity() {
-        Intent intent = new Intent(this, FriendList.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

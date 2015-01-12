@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/expandable_toggle_button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     >
+    <com.balysv.materialripple.MaterialRippleLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:rippleColor="@color/primary"
+        app:rippleOverlay="true"
+        app:rippleDuration="500"
+        app:rippleFadeDuration="75"
+        >
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/friend"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,7 +29,8 @@
         android:src="@drawable/logo_dark"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
         android:scaleType="centerCrop"
         android:layout_height="50dp"
         android:layout_width="50dp"
@@ -29,18 +40,18 @@
 
     <mehdi.sakout.fancybuttons.FancyButton
         xmlns:fancy="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/enter_weight"
+        android:id="@+id/count_view"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:padding="1dp"
         android:layout_marginRight="16dp"
-        fancy:defaultColor="@color/white"
-        fancy:text="1"
+        fancy:defaultColor="@color/primary"
+        fancy:text="0"
         fancy:textSize="6dp"
         fancy:borderWidth="2dp"
-        fancy:borderColor="@color/primary_dark"
+        fancy:borderColor="@color/primary"
         fancy:radius="30dp"
-        fancy:textColor="@color/primary_dark"
+        fancy:textColor="@color/white"
         android:layout_gravity="center_vertical"
         android:gravity="center|center_vertical|center_horizontal" />
 
@@ -59,6 +70,6 @@
 
 </LinearLayout>
 
-
+    </com.balysv.materialripple.MaterialRippleLayout>
 
 </LinearLayout>

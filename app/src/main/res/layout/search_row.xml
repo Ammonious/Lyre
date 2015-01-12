@@ -1,18 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal" >
 
-    <!-- Single ListItem -->
 
-    <!-- Product Name -->
-    <TextView android:id="@+id/user_results"
+    <com.makeramen.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/userSearchPicture"
+        android:src="@drawable/logo_dark"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:scaleType="centerCrop"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        app:corner_radius="30dip"
+        app:mutate_background="true"
+        app:oval="true" />
+
+
+    <TextView android:id="@+id/user_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="16dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/userSearchPicture"
+        android:textSize="28dp"
+        android:textColor="@color/black"
         android:textStyle="bold"/>
 
-</LinearLayout>
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        xmlns:fancy="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/add_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginRight="8dp"
+        android:padding="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        fancy:defaultColor="@color/blue"
+        fancy:focusColor="#90CAF9"
+        fancy:iconResource="@drawable/ic_add_user"
+        fancy:radius="2dp"
+        >
+    </mehdi.sakout.fancybuttons.FancyButton>
+
+</RelativeLayout>

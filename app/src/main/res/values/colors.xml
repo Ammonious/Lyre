@@ -3,19 +3,19 @@
     <color name="main">@android:color/white</color>
     <color name="white">@android:color/white</color>
     <color name="pressed_sticks">#CC99CC00</color>
-    <color name="pressed_supernatural">#CC33B5E5</color>
-    <color name="pressed_ballsohard">#CC669900</color>
+
     <color name="golden">#f2a400</color>
-    <color name="green">#CC669900</color>
+    <color name="green">#95BF0C</color>
     <color name="holoblue">#7f8c8d</color>
     <color name="red">#c0392b</color>
     <color name="grey">#34495e</color>
-    <color name="blue">#34495e</color>
     <color name="purple">#AA64CA</color>
     <color name="frame">@android:color/black</color>
     <color name="inset">#9000</color>
     <color name="black">#616161</color>
-
+    <color name="fab">#2962FF</color>
+    <color name="fab_pressed">#82B1FF</color>
+    <color name="blue">#0090E9</color>
 
     <color name="primary">#ef6c00</color>
     <color name="primary_dark">#e65100</color>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#a5a2a2">
+
+    <com.makeramen.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/alarm_screen_pic"
+        android:src="@drawable/logo"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        android:layout_height="100dp"
+        android:layout_width="100dp"
+        app:corner_radius="30dp"
+        app:mutate_background="true"
+        app:oval="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+
+        >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_centerInParent="true"
+        >
+    <TextView
+        android:id="@+id/alarm_screen_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_centerVertical="true"
+        android:textColor="@color/white"
+        android:textSize="34dp"
+        android:text="Lyra" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/ic_alarm_clock"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/ic_alarm_clock"
+            android:layout_toRightOf="@+id/alarm_screen_friend"
+
+            />
+    </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center_horizontal"
+        >
+
+       <TextView
+        android:id="@+id/alarm_screen_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:text="00:00"
+        android:textSize="48dp" />
+
+        <TextView
+            android:id="@+id/alarm_screen_am_pm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_alignBaseline="@+id/alarm_screen_time"
+            android:layout_toRightOf="@+id/alarm_screen_time"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:text="AM" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="16dp"
+            android:layout_gravity="left"
+            android:id="@+id/ic_quote_left"
+            android:background="@drawable/ic_quote_left"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="64dp"
+            android:layout_marginRight="64dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+        <TextView
+            android:id="@+id/message_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#4e4e50"
+            android:textSize="20dp"
+            android:text="Lyra" />
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="29dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="right|bottom"
+            android:id="@+id/ic_quote_right"
+            android:background="@drawable/ic_quote_right"
+            />
+
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/snooze"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/view_touch_selector"
+        >
+    <TextView
+        android:id="@+id/snooze_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="Snooze"
+        android:textSize="64dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+
+
+        />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="250dp"
+        android:layout_height="98dp"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/slider"
+            />
+
+    <slider.SlideToUnlock
+        xmlns:su="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/slidetounlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        su:slidertext="@string/slidetounlock_label"
+        su:thumb="@drawable/slidetounlock_thumb"
+
+        />
+
+   </FrameLayout>
+
+
+</LinearLayout>

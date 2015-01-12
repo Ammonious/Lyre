@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="64dp"
+    android:layout_marginRight="64dp">
+
+    <View
+        android:id="@+id/slider_bg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:background="@drawable/slidetounlock_bg"
+        />
+
+    <TextView
+        android:id="@+id/slider_label"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text=""
+        android:textSize="22sp"
+
+        />
+
+    <SeekBar
+        android:id="@+id/slider_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progressDrawable="@android:color/transparent"
+        android:thumb="@drawable/slidetounlock_thumb"
+        android:layout_marginTop="2dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+
+        />
+</merge>

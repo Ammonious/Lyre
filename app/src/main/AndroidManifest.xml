@@ -2,8 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="epimelis.com.lyre" >
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+    <!--<uses-sdk tools:node="replace" />-->
+>>>>>>> FETCH_HEAD
 =======
     <!--<uses-sdk tools:node="replace" />-->
 >>>>>>> FETCH_HEAD

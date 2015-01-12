@@ -37,9 +37,12 @@ public class AlarmListAdapter extends BaseAdapter {
     private Context mContext;
     private List<AlarmModel> mAlarms;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     ViewHolder viewHolder;
 =======
+=======
+>>>>>>> FETCH_HEAD
     Alarms displayAlarm = new Alarms();
 
     private AlarmDBHelper dbHelper;
@@ -97,13 +100,19 @@ public class AlarmListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         final AlarmModel model = (AlarmModel) getItem(position);
         final TinyDB tinydb = new TinyDB(mContext);
 =======
+=======
+>>>>>>> FETCH_HEAD
         System.out.println("View Position: " + String.valueOf(position));
         final AlarmModel model = (AlarmModel) getItem(position);
 
         ViewHolder viewHolder;
+<<<<<<< HEAD
+>>>>>>> FETCH_HEAD
+=======
 >>>>>>> FETCH_HEAD
 
         if(convertView == null) {
@@ -118,6 +127,7 @@ public class AlarmListAdapter extends BaseAdapter {
         }
         else {
 <<<<<<< HEAD
+<<<<<<< HEAD
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
@@ -129,9 +139,13 @@ public class AlarmListAdapter extends BaseAdapter {
 =======
            viewHolder = (ViewHolder) convertView.getTag();
 >>>>>>> FETCH_HEAD
+=======
+           viewHolder = (ViewHolder) convertView.getTag();
+>>>>>>> FETCH_HEAD
         }
             else if (model.timeHour == 0) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
             model.timeHour += 12;
             txtTime.setText(String.format("%1d:%02d",model.timeHour,model.timeMinute));
@@ -140,6 +154,8 @@ public class AlarmListAdapter extends BaseAdapter {
             txtTime.setText(String.format("%1d:%02d",model.timeHour,model.timeMinute));
         }
 =======
+=======
+>>>>>>> FETCH_HEAD
         final TextView txtTime = (TextView) convertView.findViewById(R.id.alarm_item_time);
         txtTime.setText(String.format("%02d:%02d", model.timeHour, model.timeMinute));
 >>>>>>> FETCH_HEAD
@@ -157,9 +173,12 @@ public class AlarmListAdapter extends BaseAdapter {
 <<<<<<< HEAD
                 ((MyAlarmScreen) mContext).setAlarmEnabled((Long) buttonView.getTag(), isChecked);
 
+<<<<<<< HEAD
 =======
                 ((AlarmSettings) mContext).setAlarmEnabled((Long) buttonView.getTag(), isChecked);
 
+=======
+>>>>>>> FETCH_HEAD
                 System.out.println(" Enable Position " + buttonView.getTag());
 >>>>>>> FETCH_HEAD
             }
@@ -277,6 +296,9 @@ public class AlarmListAdapter extends BaseAdapter {
             }
         });
 
+<<<<<<< HEAD
+>>>>>>> FETCH_HEAD
+=======
 >>>>>>> FETCH_HEAD
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_sunday), model.getRepeatingDay(AlarmModel.SUNDAY));
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_monday), model.getRepeatingDay(AlarmModel.MONDAY));
@@ -286,6 +308,7 @@ public class AlarmListAdapter extends BaseAdapter {
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_friday), model.getRepeatingDay(AlarmModel.FRDIAY));
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_saturday), model.getRepeatingDay(AlarmModel.SATURDAY));
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         viewHolder.options.setTag(model.id);
         viewHolder.options.setOnClickListener(new View.OnClickListener() {
@@ -344,6 +367,8 @@ public class AlarmListAdapter extends BaseAdapter {
     }
 
 =======
+=======
+>>>>>>> FETCH_HEAD
         convertView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -364,6 +389,9 @@ public class AlarmListAdapter extends BaseAdapter {
         return convertView;
     }
 
+<<<<<<< HEAD
+>>>>>>> FETCH_HEAD
+=======
 >>>>>>> FETCH_HEAD
     private void updateTextColor(TextView view, boolean isOn) {
         if (isOn) {

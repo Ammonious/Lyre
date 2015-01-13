@@ -34,7 +34,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
     ///TODO: only need one list of users.
 
     private List<Users> mParseUsers,mUserId,mName;
-    private List<int> mAlarms;
+    private int[] mAlarms;
     Context mContext;
     public ImageLoader imageLoader;
 
@@ -52,11 +52,15 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
        mUserId = parseUsers;
        mName = parseUsers;
 
+       mAlarms = new int[mUserId.size()];
+
        imageLoader= new ImageLoader(ctx);
 
-       for(final int i=0; i<mUserId.size(); i++)
+       for(int i=0; i<mUserId.size(); i++)
         {
             Users userId = mUserId.get(i);
+
+            final int iHateJava = i;
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Alarms");
             final ViewHolder finalHolder1 = holder;
@@ -65,9 +69,9 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
             query.countInBackground(new CountCallback() {
                 public void done(int count, ParseException e) {
                     if (e == null) {
-                        mAlarms.add(i, count);
+                        mAlarms[iHateJava] = count;
                     } else {
-                        mAlarms.add(i, 0);
+                        mAlarms.[iHateJava] = 0;
                     }
                 }
             });

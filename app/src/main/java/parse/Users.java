@@ -13,11 +13,7 @@ public class Users extends ParseUser {
 
     public Users(){
 
-
-
     }
-
-
 
     public String getUserId(){
         return getString("fbId");
@@ -33,15 +29,10 @@ public class Users extends ParseUser {
         put("name", name);
     }
 
-    public int getalarmCount(){
+    public int getAlarmCount(){
         return getInt("alarmCount");
     }
-    public void setalarmCount(int alarmCount){
+    public void setAlarmCount(int alarmCount){
         put("alarmCount", alarmCount);
     }
-
-
-
-
-
 }

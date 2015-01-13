@@ -2,17 +2,12 @@ package parse;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.makeramen.RoundedImageView;
@@ -20,11 +15,7 @@ import com.parse.CountCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 import epimelis.com.lyre.MainActivity;
@@ -40,7 +31,10 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
 
     ViewHolder holder;
+    ///TODO: only need one list of users.
+
     private List<Users> mParseUsers,mUserId,mName;
+    private List<int> mAlarms;
     Context mContext;
     public ImageLoader imageLoader;
 
@@ -58,7 +52,26 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
        mUserId = parseUsers;
        mName = parseUsers;
 
-        imageLoader= new ImageLoader(ctx);
+       imageLoader= new ImageLoader(ctx);
+
+       for(final int i=0; i<mUserId.size(); i++)
+        {
+            Users userId = mUserId.get(i);
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Alarms");
+            final ViewHolder finalHolder1 = holder;
+            query.whereEqualTo("facebookId", userId.getUserId());
+            query.whereDoesNotExist("soundfile");
+            query.countInBackground(new CountCallback() {
+                public void done(int count, ParseException e) {
+                    if (e == null) {
+                        mAlarms.add(i, count);
+                    } else {
+                        mAlarms.add(i, 0);
+                    }
+                }
+            });
+        }
     }
 
 
@@ -101,29 +114,10 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
        final Users name = mName.get(position);
        final Users alarmCount = mUserId.get(position);
 
-    /*    ParseQuery<ParseObject> query = ParseQuery.getQuery("Alarms");
-        final ViewHolder finalHolder1 = holder;
-        query.whereEqualTo("facebookId",userId.getUserId());
-        query.whereDoesNotExist("soundfile");
-        query.countInBackground(new CountCallback() {
-            public void done(int count, ParseException e) {
-                if (e == null) {
-                    System.out.println("UPDATING ALARM COUNT AMMONIOUS");
-                    String theCount = String.valueOf(count);
-
-                    finalHolder1.countView.setText(theCount);
-
-                    notifyDataSetChanged();
-                } else {
-
-                }
-            }
-        }); */
-
-                holder.username.setText(name.getName());
+                    holder.username.setText(name.getName());
                 holder.username.setTypeface(tf3);
 
-        holder.countView.setText(String.valueOf(alarmCount.getalarmCount()));
+        holder.countView.setText(String.valueOf(alarmCount.getAlarmCount()));
 
         String url = String.format(
                 "https://graph.facebook.com/%s/picture?width=150&height=150", userId.getUserId());

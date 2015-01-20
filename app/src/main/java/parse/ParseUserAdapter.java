@@ -33,7 +33,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
     ViewHolder holder;
     ///TODO: only need one list of users.
 
-    private List<Users> mParseUsers,mUserId,mName;
+    private List<Users> mUserId;
     private int[] mAlarms;
     Context mContext;
     public ImageLoader imageLoader;
@@ -49,14 +49,16 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
     public ParseUserAdapter(Context ctx, List<Users> parseUsers) {
        super(ctx, R.layout.friend_row, parseUsers);
-       mUserId = parseUsers;
-       mName = parseUsers;
+        mUserId = parseUsers;
+        imageLoader= new ImageLoader(ctx);
 
-       mAlarms = new int[mUserId.size()];
+    }
 
-       imageLoader= new ImageLoader(ctx);
+    public void populateAlarmCount()
+    {
+        mAlarms = new int[mUserId.size()];
 
-       for(int i=0; i<mUserId.size(); i++)
+        for(int i=0; i<mUserId.size(); i++)
         {
             Users userId = mUserId.get(i);
 
@@ -114,7 +116,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
         }
 
        final Users userId = mUserId.get(position);
-       final Users name = mName.get(position);
+       final Users name = mUserId.get(position);
        final int alarmCount = mAlarms[position];
 
                     holder.username.setText(name.getName());
@@ -140,11 +142,6 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
                 String Username = name.getName();
                 FriendsAlarm.launch(((MainActivity)getContext()), v.findViewById(R.id.userProfilePicture), url, Username);
              //   getContext().startActivity(intent);
-
-
-
-
-
 
            }
 

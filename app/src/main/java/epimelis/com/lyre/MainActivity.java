@@ -174,6 +174,7 @@ public class MainActivity extends BaseActivity {
                         if(friends != null){
 
                             mFriendAdapter.addAll(friends);
+                            mFriendAdapter.populateAlarmCount();
                             mListView.setVisibility(View.VISIBLE);
                             progressWheel.setVisibility(View.GONE);
                         } else {

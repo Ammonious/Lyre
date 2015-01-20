@@ -1,0 +1,21 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <PreferenceCategory android:title="Notification Settings" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefNotification"
+            android:summary="Uncheck the box to disable notifications"
+            android:title="Notifications" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Snooze Settings" >
+    <EditTextPreference
+        android:key="snoozePref"
+        android:title="Snooze Time"
+        android:summary="Enter your snooze time"
+        android:numeric="integer"
+        android:inputType="number"
+        android:maxLength="2"
+        android:dialogTitle="Lyra" />
+    </PreferenceCategory>
+</PreferenceScreen>

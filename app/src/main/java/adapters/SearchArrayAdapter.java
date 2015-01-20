@@ -1,23 +1,15 @@
 package adapters;
 
-import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.makeramen.RoundedImageView;
-import com.parse.CountCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
@@ -25,15 +17,7 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
-import com.parse.PushService;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
-
-import epimelis.com.lyre.FriendRequests;
-import epimelis.com.lyre.MainActivity;
 import epimelis.com.lyre.R;
 import mehdi.sakout.fancybuttons.FancyButton;
 import parse.Friends;
@@ -45,11 +29,19 @@ import utils.ImageLoader;
  * Created by ammonrees on 10/26/14.
  */
 public class SearchArrayAdapter extends ArrayAdapter<Users> {
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     private List<Users> mUsers;
     ImageLoader imageLoader;
     protected ParseRelation<ParseUser> mFriendsRelation;
     private ParseUser mCurrentUser;
     private List<ParseUser> addedFriends;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     public SearchArrayAdapter(Context ctx, List<Users> parseUsers) {
         super(ctx, R.layout.search_row, parseUsers);
         mUsers = parseUsers;
@@ -82,8 +74,12 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
+<<<<<<< Updated upstream
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/RobotoSlab-Bold.ttf");
         //  Typeface tf2 = Typeface.createFromAsset(context.getAssets(), "fonts/RobotoSlab-Bold.ttf");
+=======
+
+>>>>>>> Stashed changes
         Typeface tf3 = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Light.ttf");
 
         LayoutInflater mInflater = (LayoutInflater) getContext()
@@ -101,6 +97,7 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
             System.out.print("User holder already been created.  has he been added?" );
             System.out.println(holder.added);
         }
+<<<<<<< Updated upstream
 
         System.out.println("User id: " + String.valueOf(holder.id));
 
@@ -111,8 +108,23 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
 
         holder.username.setText(user.getName());
         holder.username.setTypeface(tf3);
+=======
 
+        System.out.println("User id: " + String.valueOf(holder.id));
 
+        holder.friend.setTag(position);
+        final Users user = mUsers.get(position);
+        System.out.println("User name: " + String.valueOf(user.getName()));
+        // System.out.println("This Persons Name" + name.getName()+' '+position);
+>>>>>>> Stashed changes
+
+        holder.username.setText(user.getName());
+        holder.username.setTypeface(tf3);
+
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         System.out.println( "checking if: " + user.getName() + "(" + user.getObjectId() + ") has been added already");
         ///first set it to false
         holder.friend.setVisibility(View.VISIBLE);
@@ -140,6 +152,7 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
                 final String myName = ParseUser.getCurrentUser().get("name").toString();
 
                 Friends newfriend = new Friends();
+<<<<<<< Updated upstream
 
                 newfriend.setUserId(myID); // Requested From FB ID
                 newfriend.setName(myName); // Requested From Name
@@ -148,6 +161,16 @@ public class SearchArrayAdapter extends ArrayAdapter<Users> {
                 newfriend.setfriendName(user.getName()); // Sets friends name
                 newfriend.saveInBackground(); // Saves
 
+=======
+
+                newfriend.setUserId(myID); // Requested From FB ID
+                newfriend.setName(myName); // Requested From Name
+                newfriend.setAccepted("false");
+                newfriend.setFriendId(user.getUserId()); // Gets ID of Friend according to Row
+                newfriend.setfriendName(user.getName()); // Sets friends name
+                newfriend.saveInBackground(); // Saves
+
+>>>>>>> Stashed changes
                 // String friendId = tinyDB.getString("pushfriendId");
                 ParseQuery pushQuery = ParseInstallation.getQuery();
                 pushQuery.whereEqualTo("fbId",friendID);

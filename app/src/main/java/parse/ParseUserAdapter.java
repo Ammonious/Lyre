@@ -8,14 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.makeramen.RoundedImageView;
 import com.parse.CountCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import java.util.List;
 
 import epimelis.com.lyre.MainActivity;
@@ -48,6 +54,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
     }
 
     public ParseUserAdapter(Context ctx, List<Users> parseUsers) {
+<<<<<<< Updated upstream
        super(ctx, R.layout.friend_row, parseUsers);
         mUserId = parseUsers;
         imageLoader= new ImageLoader(ctx);
@@ -77,7 +84,15 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
                 }
             });
         }
+=======
+        super(ctx, R.layout.friend_row, parseUsers);
+        mUserId = parseUsers;
+        imageLoader= new ImageLoader(ctx);
+
+>>>>>>> Stashed changes
     }
+
+
 
 
 
@@ -115,6 +130,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
         }
 
+<<<<<<< Updated upstream
        final Users userId = mUserId.get(position);
        final Users name = mUserId.get(position);
        final int alarmCount = mAlarms[position];
@@ -123,6 +139,16 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
                 holder.username.setTypeface(tf3);
 
         holder.countView.setText(String.valueOf(alarmCount));
+=======
+        final Users userId = mUserId.get(position);
+        final Users name = mUserId.get(position);
+      //  final int alarmCount = mAlarms[position];
+
+        holder.username.setText(name.getName());
+        holder.username.setTypeface(tf3);
+
+      //  holder.countView.setText(String.valueOf(alarmCount));
+>>>>>>> Stashed changes
 
         String url = String.format(
                 "https://graph.facebook.com/%s/picture?width=150&height=150", userId.getUserId());
@@ -134,16 +160,22 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
             public void onClick(View v) {
 
-             //   Intent intent = new Intent(getContext(), FriendsAlarm.class);
-             //   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-             //   intent.putExtra("name", name.getName());
-             //   intent.putExtra("picId",userId.getUserId());
+                //   Intent intent = new Intent(getContext(), FriendsAlarm.class);
+                //   intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                //   intent.putExtra("name", name.getName());
+                //   intent.putExtra("picId",userId.getUserId());
                 String url = userId.getUserId();
                 String Username = name.getName();
                 FriendsAlarm.launch(((MainActivity)getContext()), v.findViewById(R.id.userProfilePicture), url, Username);
+<<<<<<< Updated upstream
              //   getContext().startActivity(intent);
 
            }
+=======
+                //   getContext().startActivity(intent);
+
+            }
+>>>>>>> Stashed changes
 
         });
 
@@ -151,6 +183,32 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
         return convertView;
     }
 
+    public void populateAlarmCount()
+    {
+        mAlarms = new int[mUserId.size()];
+
+        for(int i=0; i<mUserId.size(); i++)
+        {
+            Users userId = mUserId.get(i);
+
+            final int iHateJava = i;
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Alarms");
+            query.whereEqualTo("facebookId", userId.getUserId());
+            query.whereDoesNotExist("soundfile");
+            query.countInBackground(new CountCallback() {
+                public void done(int count, ParseException e) {
+                    if (e == null) {
+                        mAlarms[iHateJava] = count;
+                        System.out.println("The Count of Monte " + count);
+//                        holder.countView.setText(String.valueOf(count));
+                    } else {
+                        mAlarms[iHateJava] = 0;
+                    }
+                }
+            });
+        }
+    }
 
 
 }

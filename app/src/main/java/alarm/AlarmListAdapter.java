@@ -38,7 +38,10 @@ public class AlarmListAdapter extends BaseAdapter {
     private List<AlarmModel> mAlarms;
 
     ViewHolder viewHolder;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     Alarms displayAlarm = new Alarms();
 
     private AlarmDBHelper dbHelper;
@@ -94,8 +97,11 @@ public class AlarmListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
+<<<<<<< Updated upstream
 
         final AlarmModel model = (AlarmModel) getItem(position);
+=======
+>>>>>>> Stashed changes
         final TinyDB tinydb = new TinyDB(mContext);
 
         System.out.println("View Position: " + String.valueOf(position));
@@ -123,10 +129,17 @@ public class AlarmListAdapter extends BaseAdapter {
             model.timeHour -= 12;
             txtTime.setText(String.format("%1d:%02d", model.timeHour, model.timeMinute));
            viewHolder = (ViewHolder) convertView.getTag();
+<<<<<<< Updated upstream
 
            viewHolder = (ViewHolder) convertView.getTag();
         }
             else if (model.timeHour == 0) {
+=======
+           viewHolder = (ViewHolder) convertView.getTag();
+        }
+            else if (model.timeHour == 0) {
+
+>>>>>>> Stashed changes
             model.timeHour += 12;
             txtTime.setText(String.format("%1d:%02d",model.timeHour,model.timeMinute));
         } else {
@@ -134,7 +147,10 @@ public class AlarmListAdapter extends BaseAdapter {
             txtTime.setText(String.format("%1d:%02d",model.timeHour,model.timeMinute));
         }
 
+<<<<<<< Updated upstream
         final TextView txtTime = (TextView) convertView.findViewById(R.id.alarm_item_time);
+=======
+>>>>>>> Stashed changes
         txtTime.setText(String.format("%02d:%02d", model.timeHour, model.timeMinute));
 
         TextView txtName = (TextView) convertView.findViewById(R.id.am_pm_item);
@@ -147,9 +163,14 @@ public class AlarmListAdapter extends BaseAdapter {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+<<<<<<< Updated upstream
 
                 ((MyAlarmScreen) mContext).setAlarmEnabled((Long) buttonView.getTag(), isChecked);
                 System.out.println(" Enable Position " + buttonView.getTag());
+=======
+                ((MyAlarmScreen) mContext).setAlarmEnabled((Long) buttonView.getTag(), isChecked);
+
+>>>>>>> Stashed changes
             }
         });
 
@@ -158,7 +179,6 @@ public class AlarmListAdapter extends BaseAdapter {
         viewHolder.checkBox.setChecked(model.isVisible);
         viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-<<<<<<< HEAD
                        @Override
                         public void onCheckedChanged(CompoundButton buttonView, boolean isVisible) {
                         ((MyAlarmScreen) mContext).setAlarmVisible((Long) buttonView.getTag(), isVisible);
@@ -242,33 +262,8 @@ public class AlarmListAdapter extends BaseAdapter {
 
 
 
-=======
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isVisible) {
-                ((AlarmSettings) mContext).setAlarmVisible((Long) buttonView.getTag(), isVisible);
 
-                System.out.println(" Visible Position " + buttonView.getTag());
 
-                if(isVisible) {
-
-                    String userID = ParseUser.getCurrentUser().get("fbId").toString();
-                    String alarmTxt = txtTime.getText().toString();
-                    displayAlarm.setAlarm(alarmTxt);
-                    displayAlarm.setFbId(userID);
-                    displayAlarm.saveInBackground();
-
-                }
-                else {
-
-                }
-
-            }
-        });
-
-<<<<<<< HEAD
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_sunday), model.getRepeatingDay(AlarmModel.SUNDAY));
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_monday), model.getRepeatingDay(AlarmModel.MONDAY));
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_tuesday), model.getRepeatingDay(AlarmModel.TUESDAY));
@@ -277,8 +272,6 @@ public class AlarmListAdapter extends BaseAdapter {
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_friday), model.getRepeatingDay(AlarmModel.FRDIAY));
         updateTextColor((TextView) convertView.findViewById(R.id.alarm_item_saturday), model.getRepeatingDay(AlarmModel.SATURDAY));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         viewHolder.options.setTag(model.id);
         viewHolder.options.setOnClickListener(new View.OnClickListener() {
 
@@ -335,33 +328,8 @@ public class AlarmListAdapter extends BaseAdapter {
         return convertView;
     }
 
-=======
-=======
->>>>>>> FETCH_HEAD
-        convertView.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                ((AlarmSettings) mContext).startAlarmDetailsActivity(((Long) view.getTag()).longValue());
-            }
-        });
 
-        convertView.setOnLongClickListener(new View.OnLongClickListener() {
-
-            @Override
-            public boolean onLongClick(View view) {
-                ((AlarmSettings) mContext).deleteAlarm((Long) view.getTag());
-                return true;
-            }
-        });
-
-        return convertView;
-    }
-
-<<<<<<< HEAD
->>>>>>> FETCH_HEAD
-=======
->>>>>>> FETCH_HEAD
     private void updateTextColor(TextView view, boolean isOn) {
         if (isOn) {
             view.setTextColor(mContext.getResources().getColor(R.color.primary_dark));

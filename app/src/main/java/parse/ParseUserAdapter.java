@@ -63,7 +63,6 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
             final int iHateJava = i;
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Alarms");
-            final ViewHolder finalHolder1 = holder;
             query.whereEqualTo("facebookId", userId.getUserId());
             query.whereDoesNotExist("soundfile");
             query.countInBackground(new CountCallback() {
@@ -71,7 +70,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
                     if (e == null) {
                         mAlarms[iHateJava] = count;
                     } else {
-                        mAlarms.[iHateJava] = 0;
+                        mAlarms[iHateJava] = 0;
                     }
                 }
             });
@@ -116,12 +115,12 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
        final Users userId = mUserId.get(position);
        final Users name = mName.get(position);
-       final Users alarmCount = mUserId.get(position);
+       final int alarmCount = mAlarms[position];
 
                     holder.username.setText(name.getName());
                 holder.username.setTypeface(tf3);
 
-        holder.countView.setText(String.valueOf(alarmCount.getAlarmCount()));
+        holder.countView.setText(String.valueOf(alarmCount));
 
         String url = String.format(
                 "https://graph.facebook.com/%s/picture?width=150&height=150", userId.getUserId());

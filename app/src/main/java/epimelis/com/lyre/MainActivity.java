@@ -4,7 +4,10 @@ package epimelis.com.lyre;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
 import android.view.Menu;
@@ -41,6 +44,7 @@ import parse.ParseUserAdapter;
 import parse.Users;
 import utils.BaseActivity;
 import utils.TinyDB;
+import utils.UserPreferenceActivity;
 
 
 public class MainActivity extends BaseActivity {
@@ -74,6 +78,23 @@ public class MainActivity extends BaseActivity {
             }
 
         });
+
+        SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+         PreferenceManager.setDefaultValues(this, R.xml.pref_general, false);
+        boolean notifications = getPrefs.getBoolean("prefNotification", true);
+
+        if (notifications) {
+
+            ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+            installation.put("Subscriber", "True");
+            installation.saveInBackground();
+        }
+        else{
+
+                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                installation.put("Subscriber", "False");
+                installation.saveInBackground();
+        }
 
         ParseObject.registerSubclass(Users.class);
         mListView = (SuperListview) findViewById(R.id.listView);
@@ -137,15 +158,29 @@ public class MainActivity extends BaseActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; go home
+
 
                 return true;
-
-
             case R.id.friend:
                 Intent intent = new Intent(this, FriendRequests.class);
 
                 startActivityForResult(intent, 2);
+                return true;
+            case R.id.rate:
+                Intent rateIntent = new Intent(Intent.ACTION_VIEW);
+                rateIntent.setData(Uri.parse("market://details?id=epimelis.com.lyre"));
+                startActivity(rateIntent);
+                return true;
+            case R.id.share:
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=epimelis.com.lyre");
+                startActivity(Intent.createChooser(shareIntent, "Share app"));
+                return true;
+            case R.id.action_settings:
+                Intent nextScreen4 = new Intent(getApplicationContext(), UserPreferenceActivity.class);
+                startActivityForResult(nextScreen4,2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -206,6 +241,22 @@ public class MainActivity extends BaseActivity {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
 
             mFriendAdapter.notifyDataSetChanged();
+            SharedPreferences getPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            boolean notifications = getPrefs.getBoolean("prefNotification", true);
+
+            if (notifications) {
+
+                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                installation.put("Subscriber", "True");
+                installation.saveInBackground();
+            }
+            else{
+
+                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                installation.put("Subscriber", "False");
+                installation.saveInBackground();
+            }
+
         }
     }
 

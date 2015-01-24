@@ -15,6 +15,8 @@ import com.parse.CountCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
+import java.util.HashMap;
 import java.util.List;
 
 import epimelis.com.lyre.MainActivity;
@@ -33,7 +35,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
     ///TODO: only need one list of users.
 
     private List<Users> mUserId;
-    private int[] mAlarms;
+    private HashMap<String, Integer> mAlarms;
     Context mContext;
     public ImageLoader imageLoader;
 
@@ -90,7 +92,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
        final Users userId = mUserId.get(position);
        final Users name = mUserId.get(position);
-       final int alarmCount = mAlarms[position];
+       final int alarmCount = mAlarms.get(userId.getUserId());
 
        holder.username.setText(name.getName());
        holder.username.setTypeface(tf3);
@@ -125,25 +127,20 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
     public void populateAlarmCount()
     {
-        mAlarms = new int[mUserId.size()];
-
         for(int i=0; i<mUserId.size(); i++)
         {
-            Users userId = mUserId.get(i);
-
-            final int iHateJava = i;
+            final String userId = mUserId.get(i).getUserId();
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Alarms");
-            query.whereEqualTo("facebookId", userId.getUserId());
+            query.whereEqualTo("facebookId", userId);
             query.whereDoesNotExist("soundfile");
             query.countInBackground(new CountCallback() {
                 public void done(int count, ParseException e) {
                     if (e == null) {
-                        mAlarms[iHateJava] = count;
+                        mAlarms.put(userId, count);
                         System.out.println("The Count of Monte " + count);
-//                        holder.countView.setText(String.valueOf(count));
                     } else {
-                        mAlarms[iHateJava] = 0;
+                        mAlarms.put(userId, 0);
                     }
                 }
             });

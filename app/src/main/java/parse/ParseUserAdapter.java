@@ -35,7 +35,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
     ///TODO: only need one list of users.
 
     private List<Users> mUserId;
-    private HashMap<String, Integer> mAlarms;
+    private HashMap<String, Integer> mAlarms = new HashMap<String, Integer>();
     Context mContext;
     public ImageLoader imageLoader;
 

@@ -92,8 +92,8 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
        final Users name = mUserId.get(position);
        final int alarmCount = mAlarms[position];
 
-                holder.username.setText(name.getName());
-                holder.username.setTypeface(tf3);
+       holder.username.setText(name.getName());
+       holder.username.setTypeface(tf3);
 
         holder.countView.setText(String.valueOf(alarmCount));
 

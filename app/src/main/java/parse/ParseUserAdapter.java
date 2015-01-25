@@ -92,12 +92,19 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
        final Users userId = mUserId.get(position);
        final Users name = mUserId.get(position);
-       final int alarmCount = mAlarms.get(userId.getUserId());
 
-       holder.username.setText(name.getName());
-       holder.username.setTypeface(tf3);
+       if(!mAlarms.containsKey(userId.getUserId()))
+       {
+           System.out.println("We don't have a key for " + userId.getUserId());
+       }
+        else
+       {
+           holder.countView.setText(String.valueOf(mAlarms.get(userId.getUserId())));
+       }
 
-        holder.countView.setText(String.valueOf(alarmCount));
+        holder.username.setText(name.getName());
+        holder.username.setTypeface(tf3);
+
 
         String url = String.format(
                 "https://graph.facebook.com/%s/picture?width=150&height=150", userId.getUserId());
@@ -127,6 +134,7 @@ public class ParseUserAdapter extends ArrayAdapter<Users> {
 
     public void populateAlarmCount()
     {
+        System.out.println("populating alarm count");
         for(int i=0; i<mUserId.size(); i++)
         {
             final String userId = mUserId.get(i).getUserId();
